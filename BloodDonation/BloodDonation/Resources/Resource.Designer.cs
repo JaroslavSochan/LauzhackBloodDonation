@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("MainActivity.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("BloodDonation.Resource", IsApplication=true)]
 
-namespace MainActivity
+namespace BloodDonation
 {
 	
 	

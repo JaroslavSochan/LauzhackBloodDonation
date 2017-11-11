@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AndroidSmartAirports
+﻿namespace BloodDonation
 {
     public class Person
     {
