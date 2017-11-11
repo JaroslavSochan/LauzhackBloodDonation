@@ -14,6 +14,15 @@ namespace BloodDonation
 
         private static SqlConnection connection;
 
+        private static Person personLogged;
+
+        public static Person PersonLogged
+        {
+            get { return personLogged; }
+            set { PersonLogged = value; }
+        }
+
+
         public static async Task<SqlConnection> GetConnection()
         {
             if (connection == null)
@@ -54,24 +63,24 @@ namespace BloodDonation
             return personList;
         }
 
-        public static async Task<Person> LogIn(Credentials credentials)
+        public static async Task LogIn(Credentials credentials, Person person)
         {
             var command = new SqlCommand($"select top 1 id, name from persons where login like '{credentials.User}' and pass like '{credentials.Pass}'", GetConnection().Result);
 
             command.CommandTimeout = 30;
 
-            var person = new Person();
+            person = new Person();
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
 
                 if (await reader.ReadAsync() == false)
-                    return null;
+                    return;
 
                 person.CustomerId = Convert.ToInt32(reader["id"]);
                 person.CustomerName = Convert.ToString(reader["name"]);
 
-                return person;
+                return;
             }
         }
     }

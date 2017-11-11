@@ -41,6 +41,31 @@ namespace BloodDonation
 			}
 		}
 		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f040003
+			public const int buttonLogin = 2130968579;
+			
+			// aapt resource value: 0x7f040001
+			public const int editTextName = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int editTextPass = 2130968578;
+			
+			// aapt resource value: 0x7f040000
+			public const int textViewAppName = 2130968576;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
+			{
+			}
+		}
+		
 		public partial class Layout
 		{
 			
