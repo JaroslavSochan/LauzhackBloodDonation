@@ -4,22 +4,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_vertical">
-    <TextView
-        android:text="Blood Donation"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewAppName"
-        android:gravity="center_horizontal" />
     <EditText
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:id="@+id/editTextName" />
     <EditText
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:id="@+id/editTextPass" />
     <Button
         android:text="Login"

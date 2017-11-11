@@ -42,27 +42,6 @@ namespace BloodDonation
             }
         }
 
-        public static async Task<List<Person>> GetPersons()
-        {
-            var command = new SqlCommand("select name from persons", GetConnection().Result);
-
-            List<Person> personList = new List<Person>();
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (await reader.ReadAsync())
-                {
-                    personList.Add(new Person()
-                    {
-                        CustomerId = 0,
-                        CustomerName = Convert.ToString(reader["name"])
-                    });
-                }
-            }
-
-            return personList;
-        }
-
         public static async Task LogIn(Credentials credentials, Person person)
         {
             var command = new SqlCommand($"select top 1 id, name from persons where login like '{credentials.User}' and pass like '{credentials.Pass}'", GetConnection().Result);
@@ -79,6 +58,8 @@ namespace BloodDonation
 
                 person.CustomerId = Convert.ToInt32(reader["id"]);
                 person.CustomerName = Convert.ToString(reader["name"]);
+
+                personLogged = person;
 
                 return;
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BloodDonation
 {
-    [Activity(Label = "BloodDonation", MainLauncher = true)]
+    [Activity(Label = "BloodDonation", MainLauncher = true, Theme = "@android:style/Theme.Holo.Light")]
     public class MainActivity : Activity
     {
         public EditText editTextName;
@@ -30,6 +30,11 @@ namespace BloodDonation
             progressDialog.Create();
 
 
+            //////////////////////////
+            editTextName.Text = "Daro";
+            editTextPass.Text = "Daro";
+            //////////////////////////
+
             buttonLogin = FindViewById<Button>(Resource.Id.buttonLogin);
             buttonLogin.Click += ButtonLogin_Click;
         }
@@ -39,8 +44,9 @@ namespace BloodDonation
             Credentials credentials = new Credentials() { User = editTextName.Text, Pass = editTextPass.Text };
             Person person = new Person();
             progressDialog.Show();
-            await Task.Delay(300);
-            await DatabaseAdapter.LogIn(credentials, person);
+
+            await Task.Run(() => DatabaseAdapter.LogIn(credentials, person));
+
             progressDialog.Hide();
             if (person == null)
             {
@@ -48,11 +54,9 @@ namespace BloodDonation
             }
             else
             {
-                //textViewError.Text = "Success";
-
                 Intent MainMenuIntent = new Intent();
-                //MainMenuIntent.SetClass(this, typeof(MainMenuActivity));
-                //StartActivity(MainMenuIntent);
+                MainMenuIntent.SetClass(this, typeof(MainMenuActivity));
+                StartActivity(MainMenuIntent);
             }
         }
     }
