@@ -90,6 +90,12 @@ namespace BloodDonation
 			// aapt resource value: 0x7f050001
 			public const int editTextPass = 2131034113;
 			
+			// aapt resource value: 0x7f05000d
+			public const int imageViewShuldDo1 = 2131034125;
+			
+			// aapt resource value: 0x7f05000f
+			public const int imageViewShuldDo2 = 2131034127;
+			
 			// aapt resource value: 0x7f050003
 			public const int scrollView1 = 2131034115;
 			
@@ -108,8 +114,8 @@ namespace BloodDonation
 			// aapt resource value: 0x7f05000c
 			public const int textViewShouldDo1 = 2131034124;
 			
-			// aapt resource value: 0x7f05000d
-			public const int textViewShouldDo2 = 2131034125;
+			// aapt resource value: 0x7f05000e
+			public const int textViewShouldDo2 = 2131034126;
 			
 			static Id()
 			{

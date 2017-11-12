@@ -28,6 +28,11 @@ namespace BloodDonation
         private TextView textViewAnalyzeName;
         private TextView textViewAnalyzeResults;
         private TextView textViewShouldDo;
+        private TextView textViewShouldDo1;
+        private TextView textViewShouldDo2;
+
+        private ImageView imageViewShuldDo1;
+        private ImageView imageViewShuldDo2;
 
         private Button buttonGetLastBP;
         private Button buttonAnalyzeBP;
@@ -36,6 +41,8 @@ namespace BloodDonation
         private ProgressDialog progressDialog;
 
         private BloodDonatonNeuralNet neuralNetwork;
+
+        private BloodDonatonNeuralNet.BloodState BloodState;
 
         private PlotView BloodPictureGraph;
         private bool needToStop = false;
@@ -55,6 +62,12 @@ namespace BloodDonation
             textViewAnalyzeName = FindViewById<TextView>(Resource.Id.textViewAnalyzeName);
             textViewAnalyzeResults = FindViewById<TextView>(Resource.Id.textViewAnalyzeResults);
             textViewShouldDo = FindViewById<TextView>(Resource.Id.textViewShouldDo);
+
+            textViewShouldDo1 = FindViewById<TextView>(Resource.Id.textViewShouldDo1);
+            textViewShouldDo2 = FindViewById<TextView>(Resource.Id.textViewShouldDo2);
+
+            imageViewShuldDo1 = FindViewById<ImageView>(Resource.Id.imageViewShuldDo1);
+            imageViewShuldDo2 = FindViewById<ImageView>(Resource.Id.imageViewShuldDo2);
 
             buttonGetLastBP = FindViewById<Button>(Resource.Id.buttonGetLastBP);
             buttonGetLastBP.Click += ButtonGetLastBP_Click;
@@ -313,7 +326,65 @@ namespace BloodDonation
 
         private void ButtonGetPlan_Click(object sender, EventArgs e)
         {
-            
+            switch(BloodState.Result1)
+            {
+                case nameof(Results.Hydrated):
+                    textViewShouldDo1.Text = "Drink!!";
+                    imageViewShuldDo1.SetImageResource(Resource.Drawable.drink);
+                    break;
+                case nameof(Results.Hurt):
+                    textViewShouldDo1.Text = "Visit doctor";
+                    imageViewShuldDo1.SetImageResource(Resource.Drawable.Medical);
+                    break;
+                case nameof(Results.Sick):
+                    textViewShouldDo1.Text = "Visit doctor";
+                    imageViewShuldDo1.SetImageResource(Resource.Drawable.Medical);
+                    break;
+                case nameof(Results.Kidney):
+                    textViewShouldDo1.Text = "Visit doctor";
+                    imageViewShuldDo1.SetImageResource(Resource.Drawable.Medical);
+                    break;
+                case nameof(Results.Oxygenation):
+                    textViewShouldDo1.Text = "Go out!";
+                    imageViewShuldDo1.SetImageResource(Resource.Drawable.running);
+                    break;
+            }
+
+            if(BloodState.Result1 == BloodState.Result2)
+            {
+                textViewShouldDo2.Visibility = ViewStates.Invisible;
+                imageViewShuldDo2.Visibility = ViewStates.Invisible;
+                return;
+            }
+            else
+            {
+                textViewShouldDo2.Visibility = ViewStates.Visible;
+                imageViewShuldDo2.Visibility = ViewStates.Visible;
+            }
+
+            switch (BloodState.Result2)
+            {
+                case nameof(Results.Hydrated):
+                    textViewShouldDo2.Text = "Drink!!";
+                    imageViewShuldDo2.SetImageResource(Resource.Drawable.drink);
+                    break;
+                case nameof(Results.Hurt):
+                    textViewShouldDo2.Text = "Visit doctor";
+                    imageViewShuldDo2.SetImageResource(Resource.Drawable.Medical);
+                    break;
+                case nameof(Results.Sick):
+                    textViewShouldDo2.Text = "Visit doctor";
+                    imageViewShuldDo2.SetImageResource(Resource.Drawable.Medical);
+                    break;
+                case nameof(Results.Kidney):
+                    textViewShouldDo2.Text = "Visit doctor";
+                    imageViewShuldDo2.SetImageResource(Resource.Drawable.Medical);
+                    break;
+                case nameof(Results.Oxygenation):
+                    textViewShouldDo2.Text = "Go out!";
+                    imageViewShuldDo2.SetImageResource(Resource.Drawable.running);
+                    break;
+            }
         }
 
         private void ButtonAnalyzeBP_Click(object sender, EventArgs e)
@@ -329,10 +400,10 @@ namespace BloodDonation
             textViewShouldDo.Visibility = ViewStates.Visible;
 
             var results = neuralNetwork.NeuralNetwork.Compute(bloodPictureData);
-            var bloodResult = neuralNetwork.CheckYourState(results);
+            BloodState = neuralNetwork.CheckYourState(results);
 
 
-            textViewAnalyzeResults.Text = bloodResult.Result1 + " : " + bloodResult.Result2;
+            textViewAnalyzeResults.Text = BloodState.Result1 + " : " + BloodState.Result2;
         }
 
         private void ButtonGetLastBP_Click(object sender, EventArgs e)

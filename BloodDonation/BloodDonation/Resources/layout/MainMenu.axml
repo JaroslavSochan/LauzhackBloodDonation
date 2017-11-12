@@ -68,14 +68,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViewShouldDo1"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal" 
+            />
+          <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewShuldDo1"
+            />
           <TextView
             android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViewShouldDo2"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal" 
+            />
+          <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewShuldDo2"
+            />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
