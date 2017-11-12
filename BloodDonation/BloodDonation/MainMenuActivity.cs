@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 namespace BloodDonation
 {
-    [Activity(Label = "MainMenuActivity", Theme = "@android:style/Theme.Holo.Light")]
+    [Activity(Label = "MainMenuActivity", Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/bloodbank")]
     public class MainMenuActivity : Activity
     {
         private TextView textViewLastBloodPicture;
@@ -399,6 +399,7 @@ namespace BloodDonation
             textViewAnalyzeResults.Visibility = ViewStates.Visible;
             textViewShouldDo.Visibility = ViewStates.Visible;
 
+            bloodPictureData = DatabaseAdapter.GetLastBloodData().Result;
             var results = neuralNetwork.NeuralNetwork.Compute(bloodPictureData);
             BloodState = neuralNetwork.CheckYourState(results);
 
@@ -414,9 +415,11 @@ namespace BloodDonation
             Toast.MakeText(ApplicationContext, "This is your actual blood picture", ToastLength.Long).Show();
             else
             {
+                Analyze();
                 BloodPictureGraph.Model = CalculateBP();
                 BloodPictureGraph.Invalidate();
-                Analyze();
+                
+                Toast.MakeText(ApplicationContext, "Your blood picture has beed updated", ToastLength.Long).Show();
             }
         }
     }

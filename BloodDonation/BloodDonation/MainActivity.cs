@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BloodDonation
 {
-    [Activity(Label = "BloodDonation", MainLauncher = true, Theme = "@android:style/Theme.Holo.Light")]
+    [Activity(Label = "BloodDonation", MainLauncher = true, Theme = "@android:style/Theme.Holo.Light", Icon = "@drawable/bloodbank")]
     public class MainActivity : Activity
     {
         public EditText editTextName;

@@ -25,13 +25,16 @@ namespace WindowsFormsAppDoctor
 
             Person person = new Person();
 
-            await DatabaseAdapter.LogIn(credentials, person);
+            
+            
 
-            if (person.CustomerId != -1)
-            {
+            //await DatabaseAdapter.LogIn(credentials, person);
+
+            //if (person.CustomerId != -1)
+            //{
                 AnalyserForm form = new AnalyserForm();
                 form.Show();
-            }
+            //}
         }
     }
 }
