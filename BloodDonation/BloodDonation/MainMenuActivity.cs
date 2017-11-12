@@ -82,7 +82,7 @@ namespace BloodDonation
             //await TrainNeuralNetwork();
             neuralNetwork = await LoadNeuralNetwork();
 
-            bloodPictureData = DatabaseAdapter.GetBloodData(DatabaseAdapter.PersonLogged).Result;
+            bloodPictureData = DatabaseAdapter.GetLastBloodData().Result;
 
             BloodPictureGraph.Model = CalculateBP();
             progressDialog.Hide();
@@ -124,6 +124,7 @@ namespace BloodDonation
 
                 }
             });
+
             return net;
         }
 
@@ -288,6 +289,9 @@ namespace BloodDonation
                 }
             });
 
+            if (bloodPictureData == null)
+                return plotModel;
+
             var barSeries = new BarSeries
             {
                 ItemsSource = new List<BarItem>(new[]
@@ -314,6 +318,11 @@ namespace BloodDonation
 
         private void ButtonAnalyzeBP_Click(object sender, EventArgs e)
         {
+            Analyze();
+        }
+
+        private void Analyze()
+        {
             buttonGetPlan.Visibility = ViewStates.Visible;
             textViewAnalyzeName.Visibility = ViewStates.Visible;
             textViewAnalyzeResults.Visibility = ViewStates.Visible;
@@ -328,7 +337,16 @@ namespace BloodDonation
 
         private void ButtonGetLastBP_Click(object sender, EventArgs e)
         {
+            var Data = DatabaseAdapter.GetBloodData().Result;
+
+            if(Data == null)
             Toast.MakeText(ApplicationContext, "This is your actual blood picture", ToastLength.Long).Show();
+            else
+            {
+                BloodPictureGraph.Model = CalculateBP();
+                BloodPictureGraph.Invalidate();
+                Analyze();
+            }
         }
     }
 

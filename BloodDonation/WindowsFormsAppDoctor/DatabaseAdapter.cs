@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace BloodDonation
+namespace WindowsFormsAppDoctor
 {
     public static class DatabaseAdapter
     {
@@ -65,70 +65,24 @@ namespace BloodDonation
             }
         }
 
-        public static async Task<double[]> GetBloodData()
+
+        public static async Task SetNewBloodPicture(Person person, double[] data)
         {
-            var command = new SqlCommand($"select * from bloddpictures where [ID_PERSON] = {PersonLogged.CustomerId} and [SAW_PERSON] = 0", GetConnection().Result);
+            var command = new SqlCommand($"insert into dbo.bloddpictures ([ID_PERSON],[ERYTROCYT],[FIBRINOGEN],[HEMOCYT],[LEUKOCYT],[PROTROMBIN],[TROMBOCYT],[SAW_PERSON],[SAW_DOCTOR]) values ({PersonLogged.CustomerId},{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]},0,{1})", GetConnection().Result);
 
             command.CommandTimeout = 30;
 
-            double[] data = new double[6];
-
-            int id = 0;
+            person = new Person();
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
 
                 if (await reader.ReadAsync() == false)
-                    return null;
+                    return;
 
-                data[0] = Convert.ToDouble(reader["ERYTROCYT"]);
-                data[1] = Convert.ToDouble(reader["FIBRINOGEN"]);
-                data[2] = Convert.ToDouble(reader["HEMOCYT"]);
-                data[3] = Convert.ToDouble(reader["LEUKOCYT"]);
-                data[4] = Convert.ToDouble(reader["PROTROMBIN"]);
-                data[5] = Convert.ToDouble(reader["TROMBOCYT"]);
-                id = Convert.ToInt16(reader["id"]);
+                return;
             }
-
-            command = new SqlCommand($"update bloddpictures set [SAW_PERSON] = 1 where [ID_PERSON] = {PersonLogged.CustomerId} and ID = {id}", GetConnection().Result);
-
-            command.CommandTimeout = 30;
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-
-            }
-
-            return data;
-        }
-
-        internal static async Task<double[]> GetLastBloodData()
-        {
-            var command = new SqlCommand($"select * from bloddpictures where [ID_PERSON] = {PersonLogged.CustomerId}", GetConnection().Result);
-
-            command.CommandTimeout = 30;
-
-            double[] data = new double[6];
-
-            int id = 0;
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-
-                if (await reader.ReadAsync() == false)
-                    return null;
-
-                data[0] = Convert.ToDouble(reader["ERYTROCYT"]);
-                data[1] = Convert.ToDouble(reader["FIBRINOGEN"]);
-                data[2] = Convert.ToDouble(reader["HEMOCYT"]);
-                data[3] = Convert.ToDouble(reader["LEUKOCYT"]);
-                data[4] = Convert.ToDouble(reader["PROTROMBIN"]);
-                data[5] = Convert.ToDouble(reader["TROMBOCYT"]);
-                id = Convert.ToInt16(reader["id"]);
-            }
-
-            return data;
-        }
+        }                        
     }                            
 }                                
                                  

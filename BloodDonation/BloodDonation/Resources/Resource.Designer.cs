@@ -47,6 +47,15 @@ namespace BloodDonation
 			// aapt resource value: 0x7f020000
 			public const int bloodPicture = 2130837504;
 			
+			// aapt resource value: 0x7f020001
+			public const int drink = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Medical = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int running = 2130837507;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -95,6 +104,12 @@ namespace BloodDonation
 			
 			// aapt resource value: 0x7f05000a
 			public const int textViewShouldDo = 2131034122;
+			
+			// aapt resource value: 0x7f05000c
+			public const int textViewShouldDo1 = 2131034124;
+			
+			// aapt resource value: 0x7f05000d
+			public const int textViewShouldDo2 = 2131034125;
 			
 			static Id()
 			{
