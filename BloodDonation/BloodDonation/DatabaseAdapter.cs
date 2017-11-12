@@ -64,5 +64,31 @@ namespace BloodDonation
                 return;
             }
         }
-    }
-}
+
+
+        public static async Task<double[]> GetBloodData(Person person)
+        {
+            //var command = new SqlCommand($"select top 1 id, name from persons where login like '{credentials.User}' and pass like '{credentials.Pass}'", GetConnection().Result);
+
+            //command.CommandTimeout = 30;
+
+            //person = new Person();
+
+            //using (SqlDataReader reader = command.ExecuteReader())
+            //{
+
+            //    if (await reader.ReadAsync() == false)
+            //        return;
+
+            //    person.CustomerId = Convert.ToInt32(reader["id"]);
+            //    person.CustomerName = Convert.ToString(reader["name"]);
+
+            //    personLogged = person;
+
+            //    return;
+            //}
+            return new double[] { 0.1, 0.2, 0.3, 0.2, 0.1,0.2 };
+        }                        
+    }                            
+}                                
+                                 

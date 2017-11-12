@@ -22,12 +22,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewLastBloodPicture"
                 android:gravity="center_horizontal" />
-        <!--<ImageView
-                android:src="@drawable/bloodpicture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageViewBP"
-                android:layout_marginBottom="0.0dp" />-->
             <OxyPlot.Xamarin.Android.PlotView
                 android:id="@+id/BloodPictureGraph"
                 android:layout_width="300dp"
